@@ -1,0 +1,70 @@
+generated: '2026-07-21'
+method: searched
+description: >-
+  Results of probing the /.well-known/ discovery surface for the ThunderCore
+  hosts (website, developer docs, mainnet RPC, block explorer). Status is the
+  HTTP code observed at fetch time (2026-07-21). www.thundercore.com is a
+  Next.js SPA that answers 200 text/html with the app shell for EVERY path
+  (including /.well-known/*), so those are recorded as catch-all responses, not
+  real documents, and no files were saved. No real /.well-known/ documents were
+  found on any host.
+hosts:
+  - host: https://www.thundercore.com
+    note: SPA catch-all — every path returns 200 text/html app shell; no real well-known documents
+    documents:
+      - path: /.well-known/security.txt
+        status: 200
+        type: text/html
+        catch_all: true
+      - path: /.well-known/openid-configuration
+        status: 200
+        type: text/html
+        catch_all: true
+      - path: /.well-known/oauth-authorization-server
+        status: 200
+        type: text/html
+        catch_all: true
+      - path: /.well-known/api-catalog
+        status: 200
+        type: text/html
+        catch_all: true
+      - path: /.well-known/ai-plugin.json
+        status: 200
+        type: text/html
+        catch_all: true
+  - host: https://docs.developers.thundercore.com
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+      - path: /.well-known/openid-configuration
+        status: 404
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+      - path: /.well-known/api-catalog
+        status: 404
+      - path: /.well-known/ai-plugin.json
+        status: 404
+  - host: https://mainnet-rpc.thundercore.com
+    documents:
+      - path: /.well-known/security.txt
+        status: 500
+      - path: /.well-known/openid-configuration
+        status: 500
+      - path: /.well-known/oauth-authorization-server
+        status: 500
+      - path: /.well-known/api-catalog
+        status: 500
+      - path: /.well-known/ai-plugin.json
+        status: 500
+  - host: https://explorer-mainnet.thundercore.com
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+      - path: /.well-known/openid-configuration
+        status: 404
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+      - path: /.well-known/api-catalog
+        status: 404
+      - path: /.well-known/ai-plugin.json
+        status: 404

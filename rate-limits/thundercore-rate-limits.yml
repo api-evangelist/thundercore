@@ -1,0 +1,44 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: ThunderCore
+providerId: thundercore
+created: '2026-07-21'
+modified: '2026-07-21'
+generated: '2026-07-21'
+method: searched
+description: >-
+  Documented rate and request-size limits on the public ThunderCore JSON-RPC
+  endpoints. The docs also announce a coming eth_getLogs block-range cap and
+  recommend WebSockets for frequent log pulling.
+sources:
+  - https://docs.developers.thundercore.com/network-details/thundercore-mainnet
+  - https://docs.developers.thundercore.com/network-details/thundercore-testnet
+limits:
+  - name: Public RPC requests (mainnet)
+    scope: endpoint
+    metric: requests_per_hour
+    limit: 10000
+    timeFrame: hour
+    notes: "The rate limit of the ThunderCore Mainnet endpoint is 10K/hr."
+  - name: eth_getLogs block range
+    scope: request
+    metric: block_range
+    limit: 172800
+    timeFrame: request
+    notes: >-
+      Mainnet currently allows unlimited block range on eth_getLogs but the
+      docs state this will change to a 172800-block range (already the
+      documented limit on testnet). WebSockets are recommended for frequently
+      pulling new logs.
+  - name: Block gas limit
+    scope: chain
+    metric: gas_per_block
+    limit: 100000000
+    timeFrame: block
+    notes: "100M block gas limit; transaction gas limit also 100M (code/tx size limits bind first)."
+  - name: Transaction calldata size
+    scope: transaction
+    metric: bytes
+    limit: 40960
+    timeFrame: transaction

@@ -1,0 +1,31 @@
+generated: '2026-07-21'
+method: searched
+source: https://docs.developers.thundercore.com/
+description: >-
+  Lifecycle posture for the ThunderCore chain and its public API surface.
+  Versioning is at the node/protocol level (the live mainnet RPC reports client
+  thunder/v0.8.2); the JSON-RPC API itself tracks the Ethereum JSON-RPC
+  specification rather than a ThunderCore-versioned API. No public status page
+  was found (thundercore.statuspage.io redirects to Atlassian marketing, i.e.
+  not provisioned; status.thundercore.com does not resolve). No published
+  deprecation policy was found; the docs do announce one breaking limit change.
+versioning:
+  scheme: node-client-version
+  current: thunder/v0.8.2 (observed via web3_clientVersion on 2026-07-21)
+  notes: >-
+    EVM/Ethereum protocol compatibility is the API contract; chain IDs are 108
+    (mainnet) and 18 (testnet).
+deprecation:
+  policy_url: null
+  sunset_header: false
+  announced_changes:
+    - change: >-
+        eth_getLogs block range on mainnet is currently unlimited but the docs
+        state it will change to a 172800-block range; WebSockets are the
+        recommended migration path for frequent log pulling.
+      source: https://docs.developers.thundercore.com/network-details/thundercore-mainnet
+status_page: null
+sla: null
+uptime:
+  finality: 1 block (~1 second block time, per docs "Key info")
+deprecated_operations: []

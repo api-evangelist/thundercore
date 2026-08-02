@@ -1,0 +1,45 @@
+generated: '2026-07-21'
+method: derived
+status: candidate
+source: https://docs.developers.thundercore.com/ (documented JSON-RPC + explorer API surface)
+description: >-
+  No official ThunderCore MCP server was found (npm, the modelcontextprotocol
+  registry, and the docs were searched). This is a CANDIDATE tool list derived
+  from the documented public API surface: the Ethereum JSON-RPC endpoints the
+  docs reference, the BlockScout Etherscan-style explorer API, and the official
+  subgraphs.
+server:
+  name: thundercore
+  transport: http
+  url: null
+tools:
+  - name: get_chain_info
+    description: Read chain id and client version (eth_chainId, web3_clientVersion) from the mainnet RPC.
+    source_operation: https://mainnet-rpc.thundercore.com (JSON-RPC eth_chainId)
+  - name: get_balance
+    description: Read a TT balance for an address (eth_getBalance).
+    source_operation: https://mainnet-rpc.thundercore.com (JSON-RPC eth_getBalance)
+  - name: get_block
+    description: Fetch a block by number or hash (eth_getBlockByNumber / eth_getBlockByHash).
+    source_operation: https://mainnet-rpc.thundercore.com (JSON-RPC eth_getBlockByNumber)
+  - name: get_transaction
+    description: Fetch a transaction and its receipt (eth_getTransactionByHash, eth_getTransactionReceipt).
+    source_operation: https://mainnet-rpc.thundercore.com (JSON-RPC eth_getTransactionByHash)
+  - name: get_logs
+    description: Query contract event logs windowed by block range (eth_getLogs, max 172800 blocks).
+    source_operation: https://mainnet-rpc.thundercore.com (JSON-RPC eth_getLogs)
+  - name: call_contract
+    description: Execute a read-only contract call (eth_call).
+    source_operation: https://mainnet-rpc.thundercore.com (JSON-RPC eth_call)
+  - name: send_raw_transaction
+    description: Broadcast a signed transaction (eth_sendRawTransaction).
+    source_operation: https://mainnet-rpc.thundercore.com (JSON-RPC eth_sendRawTransaction)
+  - name: explorer_account
+    description: Etherscan-style account queries (balance, txlist) on the BlockScout explorer API.
+    source_operation: https://explorer-mainnet.thundercore.com/api?module=account
+  - name: explorer_stats
+    description: Chain stats such as coin supply from the BlockScout explorer API.
+    source_operation: https://explorer-mainnet.thundercore.com/api?module=stats&action=coinsupply
+  - name: query_subgraph
+    description: GraphQL queries against the official TTSwap / TT Mining subgraphs.
+    source_operation: https://graph-node.thundercore.com/subgraphs/name/ttswap

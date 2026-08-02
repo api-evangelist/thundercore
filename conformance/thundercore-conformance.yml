@@ -1,0 +1,64 @@
+generated: '2026-07-21'
+method: derived
+source: https://docs.developers.thundercore.com/ + live probes of mainnet RPC and explorer (2026-07-21)
+description: >-
+  Standards conformance profile for ThunderCore, an EVM-compatible public
+  blockchain. Evidence is drawn from the developer docs and live probes of the
+  public endpoints.
+standards:
+  - id: ethereum-json-rpc
+    conforms: true
+    evidence: >-
+      Docs state the external protocol is compatible with Ethereum and point to
+      the Ethereum JSON-RPC reference for methods; live probe of
+      https://mainnet-rpc.thundercore.com answers standard eth_* methods
+      (eth_chainId returned 0x6c).
+  - id: json-rpc-2.0
+    conforms: true
+    evidence: >-
+      Live responses carry jsonrpc "2.0" envelopes with standard error codes
+      (-32601, -32602 observed).
+  - id: evm
+    conforms: true
+    evidence: >-
+      "ThunderCore natively supports EVM compatible smart contracts"; Solidity
+      toolchains (Hardhat, Foundry, Truffle, Remix) are the documented
+      deployment path.
+  - id: eip-155-chain-id
+    conforms: true
+    evidence: >-
+      Registered chain IDs 108 (mainnet) / 18 (testnet); eth_chainId returns
+      0x6c on mainnet.
+  - id: erc-20
+    conforms: true
+    evidence: >-
+      TT20 token standard is the chain's ERC-20 equivalent; docs cover
+      deploying TT20 tokens (thundercore/tt20 example repo).
+  - id: erc-721
+    conforms: true
+    evidence: >-
+      Docs cover NFT deployment and NFT metadata standards
+      (deploying-on-thundercore/nft-metadata-standards).
+  - id: etherscan-api
+    conforms: true
+    evidence: >-
+      BlockScout explorer exposes the Etherscan-compatible ?module=&action=
+      REST API at https://explorer-mainnet.thundercore.com/api (live probe of
+      module=stats&action=coinsupply returned a value).
+  - id: graphql
+    conforms: true
+    evidence: >-
+      Official subgraphs served from https://graph-node.thundercore.com
+      (The Graph protocol); live _meta query returned block 232531489.
+  - id: oauth2
+    conforms: false
+    evidence: Public endpoints are unauthenticated; no OAuth surface.
+  - id: openid-connect
+    conforms: false
+    evidence: No openid-configuration published on any probed host.
+  - id: rfc9457-problem-details
+    conforms: false
+    evidence: Errors use JSON-RPC 2.0 envelopes, not application/problem+json.
+  - id: rfc9116-security-txt
+    conforms: false
+    evidence: No /.well-known/security.txt on any probed host (www host is an SPA catch-all).

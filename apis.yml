@@ -1,27 +1,154 @@
 aid: thundercore
 name: ThunderCore
-description: 'ThunderCore is a company surfaced as a portfolio company of pantera-capital and added to
-  the API Evangelist network as a stub for enrichment. Sector: crypto. This profile is a lead awaiting
-  the enrichment pipeline.'
+description: >-
+  ThunderCore is an EVM-compatible layer-1 public blockchain with roughly
+  one-second block times and single-block finality, using TT as its native gas
+  token (chain ID 108). Its external protocol is Ethereum-compatible, so
+  standard Ethereum JSON-RPC methods, wallets, and Solidity toolchains
+  (Hardhat, Foundry, Truffle, Remix) work against the public RPC and WebSocket
+  endpoints, alongside a BlockScout explorer API, official subgraphs on The
+  Graph, a cross-chain bridge, and a public testnet with a faucet. Backed by
+  Pantera Capital.
 url: https://raw.githubusercontent.com/api-evangelist/thundercore/refs/heads/main/apis.yml
+accessModel:
+  pricing: unknown
+  onboarding: unknown
+  trial: false
+  try_now: false
+  public: false
+  label: Unknown
+  confidence: low
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://www.thundercore.com/favicon.ico
 x-type: company
 x-source: vc-portfolio
 x-backed-by:
 - pantera-capital
-x-tier: stub
-x-tier-reason: portfolio-lead
+x-tier: enriched
+x-tier-reason: enrichment-pipeline
 specificationVersion: '0.20'
+x-enrichment:
+  date: '2026-07-21'
+  status: enriched
+  artifacts_added: 13
+  pass: local-v1
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-07-21'
 tags:
 - Company
 - Crypto
-apis: []
+- Blockchain
+- EVM
+- JSON-RPC
+- Web3
+- Layer 1
+apis:
+- name: ThunderCore Mainnet JSON-RPC API
+  description: >-
+    Ethereum-compatible JSON-RPC 2.0 API for the ThunderCore mainnet (chain ID
+    108, TT gas token). Supports the standard eth_/net_/web3_ method surface
+    over HTTPS, with WebSocket endpoints for subscriptions; rate limited to
+    10K requests/hour on the public endpoint.
+  humanURL: https://docs.developers.thundercore.com/network-details/thundercore-mainnet
+  baseURL: https://mainnet-rpc.thundercore.com
+  tags: [JSON-RPC, EVM, Blockchain, Mainnet]
+  properties:
+  - type: Documentation
+    url: https://docs.developers.thundercore.com/network-details/thundercore-mainnet
+  - type: RateLimits
+    url: rate-limits/thundercore-rate-limits.yml
+- name: ThunderCore Testnet JSON-RPC API
+  description: >-
+    Ethereum-compatible JSON-RPC 2.0 API for the ThunderCore testnet (chain ID
+    18, TST gas token), with a faucet that dispenses TST every 86400 seconds
+    for testing DApps without risking real assets.
+  humanURL: https://docs.developers.thundercore.com/network-details/thundercore-testnet
+  baseURL: https://testnet-rpc.thundercore.com
+  tags: [JSON-RPC, EVM, Blockchain, Testnet, Sandbox]
+  properties:
+  - type: Documentation
+    url: https://docs.developers.thundercore.com/network-details/thundercore-testnet
+- name: ThunderCore Explorer API (BlockScout)
+  description: >-
+    Etherscan-compatible REST API (?module=&action=) and ETH RPC API exposed by
+    the BlockScout block explorer for the ThunderCore mainnet — accounts,
+    transactions, token balances, contract verification, and chain stats.
+  humanURL: https://explorer-mainnet.thundercore.com/api-docs
+  baseURL: https://explorer-mainnet.thundercore.com/api
+  tags: [Explorer, REST, Blockchain, BlockScout]
+  properties:
+  - type: APIReference
+    url: https://explorer-mainnet.thundercore.com/api-docs
+  - type: APIReference
+    url: https://explorer-mainnet.thundercore.com/eth-rpc-api-docs
+- name: ThunderCore Subgraph GraphQL API
+  description: >-
+    GraphQL query surface over official ThunderCore subgraphs (TTSwap DEX and
+    TT Mining) served from ThunderCore's Graph node; third-party subgraph
+    deployment is available on request via support@thundercore.com.
+  humanURL: https://docs.developers.thundercore.com/tool/tools/subgraph
+  baseURL: https://graph-node.thundercore.com/subgraphs/name/ttswap
+  tags: [GraphQL, Subgraph, DeFi, Blockchain]
+  properties:
+  - type: Documentation
+    url: https://docs.developers.thundercore.com/tool/tools/subgraph
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: DomainSecurity
+  url: security/thundercore-domain-security.yml
 - type: Website
   url: https://www.thundercore.com/
+- type: DeveloperPortal
+  url: https://docs.developers.thundercore.com/
+- type: Documentation
+  url: https://docs.developers.thundercore.com/
+- type: APIReference
+  url: https://explorer-mainnet.thundercore.com/eth-rpc-api-docs
+- type: GettingStarted
+  url: https://docs.developers.thundercore.com/deploying-on-thundercore
+- type: Support
+  url: https://help.thundercore.com/hc/en-us
+- type: Blog
+  url: https://news.thundercore.com/
+- type: GitHubOrganization
+  url: https://github.com/thundercore
+- type: TermsOfService
+  url: https://www.thundercore.com/documents/tc.pdf
+- type: PrivacyPolicy
+  url: https://www.thundercore.com/privacy
+- type: Postman
+  name: Ethereum JSON-RPC collection (referenced as the JSON-RPC method reference by the ThunderCore docs)
+  url: https://documenter.getpostman.com/view/4117254/ethereum-json-rpc/RVu7CT5J?version=latest
+- type: Whitepaper
+  url: https://docs.thundercore.com/thunder-whitepaper.pdf
+- type: Packages
+  url: packages/thundercore-packages.yml
+- type: SDKs
+  url: packages/thundercore-packages.yml
+- type: MCPServer
+  url: mcp/thundercore-mcp.yml
+- type: LLMsTxt
+  url: llms/thundercore-llms.txt
+- type: Conformance
+  url: conformance/thundercore-conformance.yml
+- type: ErrorCatalog
+  url: errors/thundercore-problem-types.yml
+- type: Lifecycle
+  url: lifecycle/thundercore-lifecycle.yml
+- type: Authentication
+  url: authentication/thundercore-authentication.yml
+- type: Sandbox
+  url: sandbox/thundercore-sandbox.yml
+- type: Conventions
+  url: conventions/thundercore-conventions.yml
+- type: AsyncAPI
+  url: asyncapi/thundercore-ws-asyncapi.yml
+- type: RateLimits
+  url: rate-limits/thundercore-rate-limits.yml

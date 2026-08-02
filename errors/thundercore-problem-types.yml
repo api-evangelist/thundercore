@@ -1,0 +1,49 @@
+generated: '2026-07-21'
+method: derived
+source: live probe of https://mainnet-rpc.thundercore.com (2026-07-21)
+format: json-rpc-2.0
+description: >-
+  Error catalog for the ThunderCore public JSON-RPC API. ThunderCore is
+  EVM-compatible and returns standard JSON-RPC 2.0 error envelopes
+  ({jsonrpc, id, error: {code, message}}). The entries below were observed by
+  probing the live mainnet endpoint; codes follow the JSON-RPC 2.0 / Ethereum
+  JSON-RPC convention. The BlockScout explorer API returns Etherscan-style
+  {status, message, result} envelopes.
+envelope:
+  json_rpc:
+    shape: '{"jsonrpc":"2.0","id":<id>,"error":{"code":<int>,"message":"<string>"}}'
+    observed: true
+problems:
+  - code: -32601
+    title: Method not found
+    observed_message: "the method eth_nonexistentMethod does not exist/is not available"
+    remediation: Use a supported Ethereum JSON-RPC method.
+    observed: true
+  - code: -32602
+    title: Invalid params
+    observed_message: "missing value for required argument 0"
+    remediation: Supply the required positional parameters for the method.
+    observed: true
+  - code: 400
+    title: Invalid JSON request
+    observed_message: "Invalid json request(empty body or not json data)"
+    remediation: POST a JSON-RPC 2.0 body with Content-Type application/json.
+    observed: true
+  - code: -32700
+    title: Parse error
+    remediation: Standard JSON-RPC 2.0 parse error for malformed JSON.
+    observed: false
+  - code: -32600
+    title: Invalid request
+    remediation: Standard JSON-RPC 2.0 invalid-request error.
+    observed: false
+  - code: -32000
+    title: Server error (execution)
+    remediation: >-
+      Ethereum-convention server error range (-32000..-32099) used for
+      execution errors such as reverted calls or insufficient funds.
+    observed: false
+rate_limiting:
+  throttled_behavior: >-
+    The public mainnet endpoint enforces a documented 10K/hr rate limit
+    (see rate-limits/thundercore-rate-limits.yml).

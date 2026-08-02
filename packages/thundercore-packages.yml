@@ -1,0 +1,59 @@
+generated: '2026-07-21'
+method: searched
+source: https://registry.npmjs.org/-/v1/search?text=thundercore
+description: >-
+  First-party ThunderCore client libraries and developer tooling found on npm
+  (published under the @thundercore scope or from the github.com/thundercore
+  org). ThunderCore is an EVM-compatible chain, so the primary "SDK" surface is
+  the standard Ethereum tooling (ethers.js, web3.js, Hardhat, Foundry, Truffle)
+  pointed at the ThunderCore RPC; the packages below are the ThunderCore-specific
+  additions. PyPI has no thundercore package (404).
+packages:
+  - language: javascript
+    registry: npm
+    name: tt-hardhat
+    url: https://www.npmjs.com/package/tt-hardhat
+    install: npm install tt-hardhat
+    repository: https://github.com/thundercore/tt-hardhat
+    description: ThunderCore Hardhat dev plugin (latest 0.1.6)
+    official: true
+  - language: javascript
+    registry: npm
+    name: "@thundercore/oracle"
+    url: https://www.npmjs.com/package/@thundercore/oracle
+    install: npm install @thundercore/oracle
+    repository: https://github.com/thundercore/tt-oracle
+    description: ThunderCore Oracle contract interfaces
+    official: true
+  - language: javascript
+    registry: npm
+    name: "@thundercore/referral-solidity"
+    url: https://www.npmjs.com/package/@thundercore/referral-solidity
+    install: npm install @thundercore/referral-solidity
+    repository: https://github.com/thundercore/referral-solidity
+    description: Solidity library for multi-level referral smart contracts on ThunderCore/Ethereum
+    official: true
+  - language: javascript
+    registry: npm
+    name: "@thundercore/eco-lib"
+    url: https://www.npmjs.com/package/@thundercore/eco-lib
+    install: npm install @thundercore/eco-lib
+    repository: https://github.com/thundercore/eco-lib
+    description: ThunderCore ecosystem React component library
+    official: true
+  - language: go
+    registry: github
+    name: thundercore-localchain
+    url: https://github.com/thundercore/thundercore-localchain
+    install: git clone https://github.com/thundercore/thundercore-localchain
+    repository: https://github.com/thundercore/thundercore-localchain
+    description: Deploy and test DApps on a local ThunderCore chain
+    official: true
+  - language: go
+    registry: github
+    name: thundercore-chain
+    url: https://github.com/thundercore/thundercore-chain
+    install: git clone https://github.com/thundercore/thundercore-chain
+    repository: https://github.com/thundercore/thundercore-chain
+    description: Official Go implementation of the PaLa protocol (the ThunderCore node)
+    official: true

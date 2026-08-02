@@ -1,0 +1,53 @@
+asyncapi: 3.0.0
+info:
+  title: ThunderCore WebSocket JSON-RPC event surface
+  version: '1.0.0'
+  description: >-
+    GENERATED (not provider-published) AsyncAPI description of ThunderCore's
+    documented WebSocket endpoints. ThunderCore publishes WebSocket URLs for
+    mainnet and testnet and recommends WebSockets for having new logs pushed
+    to you instead of polling eth_getLogs. The event protocol is the standard
+    Ethereum JSON-RPC pub/sub (eth_subscribe) surface, since ThunderCore's
+    external protocol is Ethereum-compatible. No first-party AsyncAPI document
+    is published by ThunderCore.
+  externalDocs:
+    url: https://docs.developers.thundercore.com/network-details/thundercore-mainnet
+defaultContentType: application/json
+servers:
+  mainnet:
+    host: mainnet-ws.thundercore.com
+    protocol: wss
+    description: ThunderCore Mainnet WebSocket (chain ID 108). Alternates wss://mainnet-ws.thundertoken.net and wss://mainnet-ws.thundercore.io.
+  testnet:
+    host: testnet-ws.thundercore.com
+    protocol: wss
+    description: ThunderCore Testnet WebSocket (chain ID 18).
+channels:
+  subscriptions:
+    address: /
+    description: >-
+      Ethereum JSON-RPC pub/sub channel: clients call eth_subscribe over the
+      WebSocket (subscription types per the Ethereum convention, e.g. logs for
+      contract events — the use case the ThunderCore docs call out) and receive
+      eth_subscription notifications.
+    messages:
+      subscribeRequest:
+        name: eth_subscribe
+        payload:
+          type: object
+          description: JSON-RPC 2.0 request invoking eth_subscribe.
+      subscriptionNotification:
+        name: eth_subscription
+        payload:
+          type: object
+          description: JSON-RPC 2.0 notification carrying the subscription event payload.
+operations:
+  subscribe:
+    action: send
+    channel:
+      $ref: '#/channels/subscriptions'
+    summary: Open a subscription (the docs recommend WebSockets for pushing new logs as they become available).
+x-provenance:
+  generated: '2026-07-21'
+  method: generated
+  source: https://docs.developers.thundercore.com/network-details/thundercore-mainnet

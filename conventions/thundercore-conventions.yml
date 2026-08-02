@@ -1,0 +1,46 @@
+generated: '2026-07-21'
+method: searched
+source: https://docs.developers.thundercore.com/
+description: >-
+  Cross-cutting request/response conventions for ThunderCore's public API
+  surface. ThunderCore is an EVM-compatible chain, so the conventions are those
+  of the Ethereum JSON-RPC protocol, plus the limits ThunderCore documents for
+  its hosted endpoints.
+authentication:
+  style: none (public endpoints); ECDSA transaction signing for writes
+  reference: authentication/thundercore-authentication.yml
+transport:
+  http: POST JSON-RPC 2.0 to https://mainnet-rpc.thundercore.com (Content-Type application/json)
+  websocket: wss://mainnet-ws.thundercore.com (recommended for log/event streaming)
+  batching: JSON-RPC batch requests per the JSON-RPC 2.0 spec
+idempotency:
+  supported: false
+  notes: >-
+    No Idempotency-Key style contract. Replay protection for writes comes from
+    the Ethereum account nonce + EIP-155 chain-id signature — re-broadcasting
+    an identical signed transaction cannot double-apply it, but there is no
+    documented idempotency-key mechanism for the API itself.
+pagination:
+  style: block-range windowing
+  notes: >-
+    Log queries (eth_getLogs) are windowed by fromBlock/toBlock; mainnet will
+    cap ranges at 172800 blocks. There is no cursor/offset pagination on the
+    JSON-RPC surface. The BlockScout explorer API uses Etherscan-style page
+    and offset query params.
+error_envelope:
+  shape: JSON-RPC 2.0 error object ({code, message})
+  reference: errors/thundercore-problem-types.yml
+rate_limits:
+  signaling: none documented (no rate-limit response headers documented); public mainnet endpoint limited to 10K requests/hour
+  reference: rate-limits/thundercore-rate-limits.yml
+versioning:
+  style: node client version (thunder/v0.8.2); protocol tracks Ethereum JSON-RPC
+  reference: lifecycle/thundercore-lifecycle.yml
+data_conventions:
+  quantities: hex-encoded quantities and data per the Ethereum JSON-RPC convention (e.g. eth_chainId returns "0x6c")
+  addresses: 0x-prefixed 20-byte hex, Ethereum-compatible (any Ethereum address works)
+tooling:
+  recommended:
+    - geth attach https://mainnet-rpc.thundercore.com
+    - Hardhat (tt-hardhat plugin), Foundry, Truffle, Remix
+    - Multicall/Multicall2/Multicall3 contracts for aggregated reads

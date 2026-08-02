@@ -1,0 +1,41 @@
+generated: '2026-07-21'
+method: searched
+source: https://docs.developers.thundercore.com/network-details/thundercore-mainnet
+description: >-
+  ThunderCore's public API surface is unauthenticated. The JSON-RPC endpoints
+  (mainnet and testnet, HTTP and WebSocket) and the BlockScout explorer API
+  require no API key — access is controlled by rate limiting (10K/hr on the
+  public mainnet endpoint) rather than credentials. Transaction submission is
+  authorized cryptographically: transactions are signed with the sender's
+  ECDSA (secp256k1) private key per the Ethereum transaction model, with
+  EIP-155 chain-id replay protection (chain ID 108 mainnet / 18 testnet).
+  For hosted key management and social-login auth, the docs point to Particle
+  Network's MPC-based Auth Service as a partner offering.
+summary:
+  types: [none, cryptographic-signature]
+  api_key_in: []
+  oauth2_flows: []
+schemes:
+  - name: public-json-rpc
+    type: none
+    description: >-
+      Public HTTP/WebSocket JSON-RPC endpoints with no API key; rate limited to
+      10K requests/hour on mainnet.
+    endpoints:
+      - https://mainnet-rpc.thundercore.com
+      - https://testnet-rpc.thundercore.com
+  - name: transaction-signing
+    type: cryptographic-signature
+    scheme: secp256k1-ecdsa
+    description: >-
+      State-changing operations (eth_sendRawTransaction) are authorized by an
+      ECDSA signature over the transaction with the account's private key;
+      EIP-155 chain-id (108/18) provides replay protection. Any Ethereum wallet
+      (MetaMask, Trust Wallet, etc.) works.
+  - name: partner-auth-service
+    type: third-party
+    description: >-
+      Optional MPC (Multi-Party Computation) threshold-signature auth service
+      provided by partner Particle Network for wallet-less/social login in
+      dApps.
+    docs: https://docs.developers.thundercore.com/tool/tools/auth-service
