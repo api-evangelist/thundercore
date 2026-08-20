@@ -78,7 +78,16 @@ apis:
     transactions, token balances, contract verification, and chain stats.
   humanURL: https://explorer-mainnet.thundercore.com/api-docs
   baseURL: https://explorer-mainnet.thundercore.com/api
-  tags: [Explorer, REST, Blockchain, BlockScout]
+  tags:
+  - Explorer
+  - REST
+  - Blockchain
+  - Blockscout
+  tags_raw:
+  - Explorer
+  - REST
+  - Blockchain
+  - BlockScout
   properties:
   - type: APIReference
     url: https://explorer-mainnet.thundercore.com/api-docs
